@@ -1,15 +1,16 @@
-#include </Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/bits/stdc++.h>
-
+#include <bits/stdc++.h>
 
 using namespace std;
 
 int N;
 vector<int> P, W, D;
 
-int getTime(c) {
-    seconds = 0
+long long get_time(int pos) {
+    long long seconds = 0;
     for (int i=0;i<N;i++) {
-        seconds += W[i] * (abs(P[i] - c) - D[i]);
+        long long distance = abs(P[i] - pos) - D[i];
+        if (distance > 0)
+            seconds += W[i] * distance;
     }
     return seconds;
 }
@@ -17,37 +18,39 @@ int getTime(c) {
 int main()
 {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    int l = INT_MAX, r = INT_MIN, mid, shortest_time;
-    cin >> N;
+    int l = INT_MAX, r = INT_MIN, mid;
+    long long shortest_time;
 
+    cin >> N;
     P.resize(N);
     W.resize(N);
     D.resize(N);
 
-    // P = position
-    // W = 1 metre per Wi seconds
-    // D = distance can hear from (metres)
-
     for (int i=0;i<N;i++) {
         cin >> P[i] >> W[i] >> D[i];
-        l = min(l, P[i]);
-        r = max(r, P[i]);
+        if (P[i] < l)
+            l = P[i];
+        if (P[i] > r)
+            r = P[i];
     }
 
     while (l <= r) {
         mid = l + (r - l) / 2;
 
-        int time = getTime(mid);
-        int timePlusOne = getTime(mid+1);
-        int timeMinusOne = getTime(mid-1);
-        if ((time < timePlusOne) && (time < timeMinusOne) {
+        long long time = get_time(mid);
+        long long timePlusOne = get_time(mid+1);
+        long long timeMinusOne = get_time(mid-1);
+
+        if ((time <= timePlusOne) && (time <= timeMinusOne)) {
             shortest_time = time;
-        } else if (time > timePlusOne) {
-            l = mid + 1;
-        } else {
+            break;
+        } else if (time < timePlusOne) {
             r = mid - 1;
+        } else {
+            l = mid + 1;
         }
     }
 
     cout << shortest_time << "\n";
+    return 0;
 };
