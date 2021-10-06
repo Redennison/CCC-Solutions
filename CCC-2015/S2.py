@@ -18,7 +18,7 @@ for i in range(0, numAthletes):
     number = int(request[1])
     players.append((size, number))
 
-# Loops through players to determin in jersey available
+# Loops through players to determine if jersey available
 for player in players:
     playersSize = player[0]
     playersNumber = player[1]
