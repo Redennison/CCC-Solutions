@@ -6,25 +6,24 @@ Points:
 Solution:
 - Loop through each requested size/number
     - If requested number in numbersTaken, jersey not available
-    - If size exists, jersey available
-    - Increment size to see if above sizes are available (if so, jersey available)
+        - If size exists, jersey available
+        - If size doesn't exist, check the closest larger size available
+        - If exact or larger size available jersey available
+            - # can no longer be taken
+            - 1 less size of the jersey size taken
+            - Another athlete gets jersey they wanted
 '''
-
-from collections import Counter
 
 # GLOBAL VARIABLES
 numJerseys = int(input())
 numAthletes = int(input())
-
-sizes = ('S','M','L')
-availableJerseySizes = Counter()
+availableJerseySizes = {'S': 0, 'M': 0, 'L': 0}
 numbersTaken = set()
 maxRequestsSatisfied = 0
 
 # Gets jerseys available as input
 for i in range(0, numJerseys):
-    size = input()
-    availableJerseySizes[size] += 1
+    availableJerseySizes[input()] += 1
 
 for i in range(0, numAthletes):
     requests = input().split(" ") 
@@ -34,13 +33,14 @@ for i in range(0, numAthletes):
     # Check if number isn't taken
     if requestedNumber not in numbersTaken:
 
-        sizeNumber = sizes.index(requestedSize)
-        for i in range(sizeNumber, 3):
-            # Jersey available if size in sizes
-            if availableJerseySizes[sizes[i]] > 0:
+        sizeIndex = list(availableJerseySizes.keys()).index(requestedSize)
+        for i in range(sizeIndex, 3):
+            size = list(availableJerseySizes.keys())[i]
+            # Jersey available if there is a jersey in that size
+            if availableJerseySizes[size] > 0:
                 maxRequestsSatisfied += 1
-                # Sizes available is 1 less since 1 is now taken
-                availableJerseySizes[sizes[i]] -= 1
+                # 1 less available jersey in chosen size
+                availableJerseySizes[size] -= 1
                 # Number can no longer be taken
                 numbersTaken.add(requestedNumber)
                 break
