@@ -35,6 +35,6 @@ while (l <= r):
     else: 
         l = mid + 1
 
-print(round(shortestTime))
+print(shortestTime)
 
 
