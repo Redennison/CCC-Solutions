@@ -1,4 +1,3 @@
-# Global variables
 numJerseys = int(input())
 numAthletes = int(input())
 jerseys = {}
