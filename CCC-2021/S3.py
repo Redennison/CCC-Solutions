@@ -21,7 +21,7 @@ for i in range(0, n):
     r = max(r, p[i])
 
 while (l <= r):
-    mid = round(l + (r - l) / 2)
+    mid = int(l + (r - l) / 2)
 
     time = getTime(mid) 
     timeplusOne = getTime(mid+1)
