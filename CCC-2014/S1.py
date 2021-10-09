@@ -21,5 +21,4 @@ for i in range(m):
         j += 1
 
 for i in range(len(friends)):
-    if friends[i] != -1:
-        print(friends[i])
+    print(friends[i])
