@@ -2,14 +2,11 @@
 
 using namespace std;
 
-// CONSTANTS
-
 const int INF = INT_MAX;
 const int MXN = 100;
 int N, arr[MXN];
 
-int main()
-{
+int main() {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     cin >> N;
     for (int i=0;i<N;i++)
